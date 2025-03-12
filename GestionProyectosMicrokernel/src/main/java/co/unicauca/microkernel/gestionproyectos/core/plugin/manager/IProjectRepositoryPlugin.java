@@ -12,7 +12,7 @@ import java.util.List;
  * 
  * @author C2T26Q3
  */
-public interface IProjectRepositoryPlugin {
+public interface IProjectRepositoryPlugin extends IPlugin{
 
     /**
      * Agrega un nuevo proyecto al repositorio.

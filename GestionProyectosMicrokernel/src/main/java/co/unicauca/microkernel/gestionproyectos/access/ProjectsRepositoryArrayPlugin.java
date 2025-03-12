@@ -49,4 +49,14 @@ public class ProjectsRepositoryArrayPlugin implements IProjectRepositoryPlugin {
             // To be implemented
             return null;
     }
+
+    @Override
+    public void initialize() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void shutdown() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

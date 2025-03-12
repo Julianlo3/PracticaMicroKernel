@@ -17,7 +17,13 @@ public class NormalizationStep implements PipelineStep {
      */
     @Override
     public Project process(Project proyecto) {
-        // To be implemented
-        return null;
+        if (proyecto == null) {
+            throw new IllegalArgumentException("El proyecto no puede ser nulo");
+        }
+        
+        String tituloNormalizado = proyecto.getTitle().toUpperCase();
+        proyecto.setTitulo(tituloNormalizado);
+        
+        return proyecto;
     }
 }
