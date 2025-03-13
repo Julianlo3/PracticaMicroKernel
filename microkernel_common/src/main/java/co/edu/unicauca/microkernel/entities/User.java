@@ -4,15 +4,24 @@
  */
 package co.edu.unicauca.microkernel.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author lopez
  */
 public class User {
+    
+    private static List<User> listaUsers = new ArrayList<>();
     private String name;
     private String email;
     private String role; // "COORDINADOR", "EMPRESA", "ESTUDIANTE"
 
+    public User() {
+    }
+
+    
     /**
      * Constructor de la clase User.
      * 
@@ -24,6 +33,7 @@ public class User {
         this.name = nombre;
         this.email = email;
         this.role = rol;
+        listaUsers.add(this);
     }
 
     /**
@@ -46,4 +56,8 @@ public class User {
      * @return Rol del usuario.
      */
     public String getRole() { return role; }
+    
+     public static List<User> getUser() {
+        return listaUsers;
+    }
 }

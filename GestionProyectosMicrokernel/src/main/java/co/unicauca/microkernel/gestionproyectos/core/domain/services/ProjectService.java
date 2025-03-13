@@ -10,27 +10,26 @@ import co.unicauca.microkernel.gestionproyectos.core.domain.services.validationP
 import co.unicauca.microkernel.gestionproyectos.core.plugin.manager.PluginManager;
 
 /**
- * Servicio para gestionar proyectos dentro del sistema.
- * Permite registrar proyectos, listarlos y asignarlos a estudiantes.
- * 
+ * Servicio para gestionar proyectos dentro del sistema. Permite registrar
+ * proyectos, listarlos y asignarlos a estudiantes.
+ *
  * Utiliza un pipeline de validación, normalización y registro para garantizar
  * la correcta gestión de los proyectos.
- * 
+ *
  * @author C2T26Q3
  */
 public class ProjectService {
+
     private IProjectRepositoryPlugin repositorio;
     private ProjectPipeline pipeline;
-    
+
     /**
-     * Constructor de ProjectService.
-     * Obtiene el repositorio de proyectos desde el PluginManager y configura
-     * el pipeline de procesamiento.
+     * Constructor de ProjectService. Obtiene el repositorio de proyectos desde
+     * el PluginManager y configura el pipeline de procesamiento.
      */
-    public ProjectService() {
-        this.repositorio = PluginManager.getPlugins().get(0);
+    public ProjectService(IProjectRepositoryPlugin repositorio) {
+        this.repositorio = repositorio;
         this.pipeline = new ProjectPipeline();
-        // Se agregan los pasos del pipeline
         this.pipeline.addStep(new ValidationStep());
         this.pipeline.addStep(new NormalizationStep());
         this.pipeline.addStep(new RegisterStep(repositorio));
@@ -38,10 +37,10 @@ public class ProjectService {
 
     /**
      * Registra un nuevo proyecto en el sistema.
-     * 
-     * @param title       Título del proyecto.
+     *
+     * @param title Título del proyecto.
      * @param description Descripción del proyecto.
-     * @param empresa     Usuario que representa la empresa que propone el proyecto.
+     * @param empresa Usuario que representa la empresa que propone el proyecto.
      */
     public void registerProject(String title, String description, User empresa) {
         Project proyecto = new Project(title, description, empresa);
@@ -62,8 +61,8 @@ public class ProjectService {
 
     /**
      * Asigna un estudiante a un proyecto específico.
-     * 
-     * @param titulo     Título del proyecto a asignar.
+     *
+     * @param titulo Título del proyecto a asignar.
      * @param estudiante Usuario que representa al estudiante.
      */
     public void assignProject(String titulo, User estudiante) {
@@ -76,4 +75,3 @@ public class ProjectService {
         System.out.println("Proyecto asignado a: " + estudiante.getName());
     }
 }
-

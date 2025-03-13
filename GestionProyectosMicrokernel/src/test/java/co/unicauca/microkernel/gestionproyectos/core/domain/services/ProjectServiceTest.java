@@ -29,7 +29,7 @@ public class ProjectServiceTest {
         PluginManager.registerPlugin(repositorio);
 
         // Crear una instancia de ProjectService
-        projectService = new ProjectService();
+        projectService = new ProjectService(repositorio);
     }
 
     @Test
