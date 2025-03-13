@@ -1,7 +1,7 @@
 package co.unicauca.microkernel.gestionproyectos.access;
 
-import co.unicauca.microkernel.gestionproyectos.core.plugin.manager.IProjectRepositoryPlugin;
-import co.unicauca.microkernel.gestionproyectos.core.domain.entities.Project;
+import co.edu.unicauca.microkernel.entities.Project;
+import co.edu.unicauca.microkernel.interfaces.IProjectRepositoryPlugin;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +14,14 @@ import java.util.List;
  */
 public class ProjectsRepositoryArrayPlugin implements IProjectRepositoryPlugin {
 
-    // To be implemented the array
+    private final List<Project> projects;
+    
+    /**
+     * Constructor que inicializa la lista de proyectos.
+     */
+    public ProjectsRepositoryArrayPlugin() {
+        this.projects = new ArrayList<>();
+    }
   
 
     /**
@@ -24,7 +31,9 @@ public class ProjectsRepositoryArrayPlugin implements IProjectRepositoryPlugin {
      */
     @Override
     public void addProject(Project proyecto) {
-        // To be implemented
+        if (proyecto != null) {
+            projects.add(proyecto);
+        }
     }
 
     /**
@@ -34,8 +43,7 @@ public class ProjectsRepositoryArrayPlugin implements IProjectRepositoryPlugin {
      */
     @Override
     public List<Project> getProjects() {
-        // To be implemented
-        return null;
+        return new ArrayList<>(projects); // Retornar una copia para evitar modificaciones externas
     }
 
     /**
@@ -46,17 +54,21 @@ public class ProjectsRepositoryArrayPlugin implements IProjectRepositoryPlugin {
      */
     @Override
     public Project findProjectByTitle(String titulo) {
-            // To be implemented
-            return null;
+        for (Project project : projects) {
+            if (project.getTitle().equalsIgnoreCase(titulo)) {
+                return project;
+            }
+        }
+        return null;
     }
 
     @Override
     public void initialize() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.println("Plugin_ArrayList inicializado.");
     }
 
     @Override
     public void shutdown() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.println("Plugin_ArrayList detenido.");
     }
 }

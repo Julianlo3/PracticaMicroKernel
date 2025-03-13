@@ -1,8 +1,10 @@
 package co.unicauca.microkernel.gestionproyectos.core.domain.services;
 
-import co.unicauca.microkernel.gestionproyectos.core.plugin.manager.IProjectRepositoryPlugin;
-import co.unicauca.microkernel.gestionproyectos.core.domain.entities.Project;
-import co.unicauca.microkernel.gestionproyectos.core.domain.entities.User;
+
+import co.edu.unicauca.microkernel.entities.Project;
+import co.edu.unicauca.microkernel.entities.User;
+import co.edu.unicauca.microkernel.interfaces.IProjectRepositoryPlugin;
+import co.edu.unicauca.microkernel.microkernel_plugin.Plugin_ArrayList;
 import co.unicauca.microkernel.gestionproyectos.core.plugin.manager.PluginManager;
 import co.unicauca.microkernel.gestionproyectos.access.ProjectsRepositoryArrayPlugin;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +22,7 @@ public class ProjectServiceTest {
     @BeforeEach
     public void setUp() {
         // Inicializar el repositorio real
-        repositorio = new ProjectsRepositoryArrayPlugin();
+        repositorio = new Plugin_ArrayList();
 
         // Registrar el repositorio en el PluginManager
         PluginManager.getPlugins().clear();

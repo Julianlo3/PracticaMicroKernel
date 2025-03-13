@@ -1,6 +1,8 @@
 package co.unicauca.microkernel.gestionproyectos.core.domain.services.validationPipelines;
 
-import co.unicauca.microkernel.gestionproyectos.core.domain.entities.Project;
+import co.edu.unicauca.microkernel.entities.Project;
+
+
 
 /**
  * Clase que representa un paso de validación en un pipeline de procesamiento de proyectos.

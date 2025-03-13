@@ -5,7 +5,7 @@
 package co.edu.unicauca.microkernel.microkernel_plugin;
 
 import co.edu.unicauca.microkernel.entities.Project;
-import co.edu.unicauca.microkernel.interfaces.IProjectRepositoryPlugin2;
+import co.edu.unicauca.microkernel.interfaces.IProjectRepositoryPlugin;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author lopez
  */
-public class Plugin_ArrayList implements IProjectRepositoryPlugin2{
+public class Plugin_ArrayList implements IProjectRepositoryPlugin{
 
     private final List<Project> projects;
     

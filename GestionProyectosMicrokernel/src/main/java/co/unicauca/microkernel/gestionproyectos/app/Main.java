@@ -1,11 +1,9 @@
 package co.unicauca.microkernel.gestionproyectos.app;
 
-import co.edu.unicauca.microkernel.interfaces.IProjectRepositoryPlugin2;
+import co.edu.unicauca.microkernel.entities.User;
+import co.edu.unicauca.microkernel.interfaces.IProjectRepositoryPlugin;
 import co.edu.unicauca.microkernel.microkernel_plugin.Plugin_ArrayList;
 import co.unicauca.microkernel.gestionproyectos.core.domain.services.ProjectService;
-import co.unicauca.microkernel.gestionproyectos.core.plugin.manager.IProjectRepositoryPlugin;
-import co.unicauca.microkernel.gestionproyectos.access.ProjectsRepositoryArrayPlugin;
-import co.unicauca.microkernel.gestionproyectos.core.domain.entities.User;
 import co.unicauca.microkernel.gestionproyectos.core.plugin.manager.PluginManager;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -65,11 +63,12 @@ public class Main {
         }
         
         // Inicialización del repositorio de proyectos (pendiente crear la fábrica)
-        IProjectRepositoryPlugin repositorioProyectos = new ProjectsRepositoryArrayPlugin();
+        //IProjectRepositoryPlugin repositorioProyectos = new ProjectsRepositoryArrayPlugin();
+        IProjectRepositoryPlugin repositorioProyectos = new Plugin_ArrayList();
         //IProjectRepositoryPlugin2 repositorioProyectos = new Plugin_ArrayList();
         
         // Registrar el plugin en el sistema
-        PluginManager.registerPlugin((IProjectRepositoryPlugin) repositorioProyectos);
+        PluginManager.registerPlugin( repositorioProyectos);
         
         // Crear instancia del servicio de proyectos
         ProjectService projectService = new ProjectService();

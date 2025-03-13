@@ -1,5 +1,6 @@
 package co.unicauca.microkernel.gestionproyectos.core.plugin.manager;
 
+import co.edu.unicauca.microkernel.interfaces.IProjectRepositoryPlugin;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

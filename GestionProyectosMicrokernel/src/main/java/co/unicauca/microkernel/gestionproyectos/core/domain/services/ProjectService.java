@@ -1,12 +1,12 @@
 package co.unicauca.microkernel.gestionproyectos.core.domain.services;
 
+import co.edu.unicauca.microkernel.entities.Project;
+import co.edu.unicauca.microkernel.entities.User;
+import co.edu.unicauca.microkernel.interfaces.IProjectRepositoryPlugin;
 import co.unicauca.microkernel.gestionproyectos.core.domain.services.validationPipelines.ValidationStep;
 import co.unicauca.microkernel.gestionproyectos.core.domain.services.validationPipelines.RegisterStep;
 import co.unicauca.microkernel.gestionproyectos.core.domain.services.validationPipelines.NormalizationStep;
 import co.unicauca.microkernel.gestionproyectos.core.domain.services.validationPipelines.ProjectPipeline;
-import co.unicauca.microkernel.gestionproyectos.core.plugin.manager.IProjectRepositoryPlugin;
-import co.unicauca.microkernel.gestionproyectos.core.domain.entities.Project;
-import co.unicauca.microkernel.gestionproyectos.core.domain.entities.User;
 import co.unicauca.microkernel.gestionproyectos.core.plugin.manager.PluginManager;
 
 /**

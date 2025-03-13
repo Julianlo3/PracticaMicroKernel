@@ -1,6 +1,8 @@
 package co.unicauca.microkernel.gestionproyectos.core.domain.services.validationPipelines;
 
-import co.unicauca.microkernel.gestionproyectos.core.domain.entities.Project;
+import co.edu.unicauca.microkernel.entities.Project;
+
+
 
 /**
  * Interfaz que define un contrato para los pasos que forman parte de un pipeline de procesamiento

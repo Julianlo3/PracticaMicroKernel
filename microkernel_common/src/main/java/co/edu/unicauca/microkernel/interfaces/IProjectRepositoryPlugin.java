@@ -1,9 +1,17 @@
-package co.unicauca.microkernel.gestionproyectos.core.plugin.manager;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
+package co.edu.unicauca.microkernel.interfaces;
 
-import co.unicauca.microkernel.gestionproyectos.core.domain.entities.Project;
+import co.edu.unicauca.microkernel.entities.Project;
 import java.util.List;
 
 /**
+ *
+ * @author lopez
+ */
+    /**
  * Interfaz que define el contrato para la gestión de proyectos en un repositorio.
  * Permite agregar, buscar y listar proyectos.
  * 
@@ -35,5 +43,4 @@ public interface IProjectRepositoryPlugin extends IPlugin{
      * @return Lista de objetos Project.
      */
     List<Project> getProjects();
-    
 }
