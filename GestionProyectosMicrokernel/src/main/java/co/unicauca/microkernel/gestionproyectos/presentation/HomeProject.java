@@ -7,29 +7,37 @@ package co.unicauca.microkernel.gestionproyectos.presentation;
 import co.edu.unicauca.microkernel.entities.Project;
 import co.edu.unicauca.microkernel.entities.User;
 import co.edu.unicauca.microkernel.interfaces.IProjectRepositoryPlugin;
+import co.edu.unicauca.microkernel.interfaces.observer;
+import co.unicauca.microkernel.gestionproyectos.core.domain.services.ProjectService;
 import co.unicauca.microkernel.gestionproyectos.core.plugin.manager.PluginManager;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author lopez
  */
-public class HomeProject extends javax.swing.JFrame {
+public class HomeProject extends javax.swing.JFrame implements observer {
 
     private IProjectRepositoryPlugin repositorio;
     private User user;
     private List<User> Users = new ArrayList<>();
+    private ProjectService project; // Solo la declaración
+
     /**
      * Creates new form HomeProject
      */
     public HomeProject(IProjectRepositoryPlugin plugin) {
         initComponents();
         this.repositorio = plugin;
+        this.project = new ProjectService(plugin);
         this.Users = user.getUser();
+        this.project.addObserver(this);
         fillTableProject();
         fillTableUser();
+
     }
 
     /**
@@ -40,13 +48,13 @@ public class HomeProject extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPBody = new javax.swing.JPanel();
         jPLateralMenu = new javax.swing.JPanel();
         jLMenu = new javax.swing.JLabel();
         jBtnRegisterProject = new javax.swing.JButton();
         jBtnBack = new javax.swing.JButton();
+        jBtnRegistrarUsuario = new javax.swing.JButton();
         jPContent = new javax.swing.JPanel();
         jPCompany = new javax.swing.JPanel();
         jLProject = new javax.swing.JLabel();
@@ -75,7 +83,12 @@ public class HomeProject extends javax.swing.JFrame {
         jBtnRegisterProject.setBackground(new java.awt.Color(0, 0, 0));
         jBtnRegisterProject.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jBtnRegisterProject.setForeground(new java.awt.Color(255, 255, 255));
-        jBtnRegisterProject.setText("Registrar empresa");
+        jBtnRegisterProject.setText("Registrar proyecto");
+        jBtnRegisterProject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRegisterProjectActionPerformed(evt);
+            }
+        });
         jPLateralMenu.add(jBtnRegisterProject, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, 50));
 
         jBtnBack.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -86,6 +99,17 @@ public class HomeProject extends javax.swing.JFrame {
             }
         });
         jPLateralMenu.add(jBtnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, -1, -1));
+
+        jBtnRegistrarUsuario.setBackground(new java.awt.Color(0, 0, 0));
+        jBtnRegistrarUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jBtnRegistrarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnRegistrarUsuario.setText("Registrar Usuario");
+        jBtnRegistrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRegistrarUsuarioActionPerformed(evt);
+            }
+        });
+        jPLateralMenu.add(jBtnRegistrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 180, 50));
 
         jPContent.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -242,30 +266,52 @@ public class HomeProject extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jBtnBackActionPerformed
 
-  public void fillTableProject(){
-      DefaultTableModel modeloProyectos = new DefaultTableModel(new String[]{"Titulo", "descripcion", "Comapañia","Estudiante encargado"}, 0);
-      modeloProyectos.setRowCount(0);
-      
-      for (Project project : repositorio.getProjects()) {
-            modeloProyectos.addRow(new Object[]{project.getTitle(),project.getDescription(),project.getCompany().getName(),project.getStudent().getName() });
+    private void jBtnRegisterProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRegisterProjectActionPerformed
+        List<User> empresas = new ArrayList<>();
+        for (User user : Users) {
+            if (user.getRole() == "EMPRESA") {
+                empresas.add(user);
+            }
         }
-        jTableProjects.setModel(modeloProyectos);   
-  }
+        newProject project = new newProject(empresas, repositorio);
+        project.setVisible(true);
+    }//GEN-LAST:event_jBtnRegisterProjectActionPerformed
 
-  public void fillTableUser(){
-      DefaultTableModel modeloUser = new DefaultTableModel(new String[]{"Nombre", "email", "rol"}, 0);
-      modeloUser.setRowCount(0);
-      
-      for (User user :  Users) {
-            modeloUser.addRow(new Object[]{user.getName(),user.getEmail(),user.getRole()});
+    private void jBtnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRegistrarUsuarioActionPerformed
+        newUser user = new newUser(Users);
+        user.setVisible(true);
+    }//GEN-LAST:event_jBtnRegistrarUsuarioActionPerformed
+
+    public void fillTableProject() {
+        DefaultTableModel modeloProyectos = new DefaultTableModel(new String[]{"Titulo", "descripcion", "Comapañia", "Estudiante encargado"}, 0);
+        modeloProyectos.setRowCount(0);
+
+        for (Project project : repositorio.getProjects()) {
+
+            if (project.getStudent() != null && project.getStudent().getName() != null) {
+                modeloProyectos.addRow(new Object[]{project.getTitle(), project.getDescription(), project.getCompany().getName(), project.getStudent().getName()});
+            } else {
+                modeloProyectos.addRow(new Object[]{project.getTitle(), project.getDescription(), project.getCompany().getName(), "no tiene"});
+            }
         }
-        jTableUser.setModel(modeloUser);   
-  }
-  
+        jTableProjects.setModel(modeloProyectos);
+    }
+
+    public void fillTableUser() {
+        DefaultTableModel modeloUser = new DefaultTableModel(new String[]{"Nombre", "email", "rol"}, 0);
+        modeloUser.setRowCount(0);
+
+        for (User user : Users) {
+            modeloUser.addRow(new Object[]{user.getName(), user.getEmail(), user.getRole()});
+        }
+        jTableUser.setModel(modeloUser);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Usuarios;
     private javax.swing.JButton jBtnBack;
     private javax.swing.JButton jBtnRegisterProject;
+    private javax.swing.JButton jBtnRegistrarUsuario;
     private javax.swing.JLabel jLMenu;
     private javax.swing.JLabel jLProject;
     private javax.swing.JLabel jLTitulo;
@@ -280,4 +326,11 @@ public class HomeProject extends javax.swing.JFrame {
     private javax.swing.JTable jTableProjects;
     private javax.swing.JTable jTableUser;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update() {
+        fillTableUser();
+        fillTableProject();
+        System.out.println("Tablas actualizadas por medio del observer");
+    }
 }

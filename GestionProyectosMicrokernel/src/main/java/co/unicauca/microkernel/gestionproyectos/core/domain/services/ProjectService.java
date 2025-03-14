@@ -1,13 +1,17 @@
 package co.unicauca.microkernel.gestionproyectos.core.domain.services;
 
 import co.edu.unicauca.microkernel.entities.Project;
+import co.edu.unicauca.microkernel.entities.Subject;
 import co.edu.unicauca.microkernel.entities.User;
 import co.edu.unicauca.microkernel.interfaces.IProjectRepositoryPlugin;
+import co.edu.unicauca.microkernel.interfaces.observer;
 import co.unicauca.microkernel.gestionproyectos.core.domain.services.validationPipelines.ValidationStep;
 import co.unicauca.microkernel.gestionproyectos.core.domain.services.validationPipelines.RegisterStep;
 import co.unicauca.microkernel.gestionproyectos.core.domain.services.validationPipelines.NormalizationStep;
 import co.unicauca.microkernel.gestionproyectos.core.domain.services.validationPipelines.ProjectPipeline;
 import co.unicauca.microkernel.gestionproyectos.core.plugin.manager.PluginManager;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Servicio para gestionar proyectos dentro del sistema. Permite registrar
@@ -18,11 +22,10 @@ import co.unicauca.microkernel.gestionproyectos.core.plugin.manager.PluginManage
  *
  * @author C2T26Q3
  */
-public class ProjectService {
-
+public class ProjectService extends Subject{
     private IProjectRepositoryPlugin repositorio;
     private ProjectPipeline pipeline;
-
+    private static ProjectService instance; // Instancia única
     /**
      * Constructor de ProjectService. Obtiene el repositorio de proyectos desde
      * el PluginManager y configura el pipeline de procesamiento.
@@ -47,6 +50,7 @@ public class ProjectService {
         try {
             pipeline.execute(proyecto);
             System.out.println("Proyecto registrado: " + proyecto.getTitle());
+            notifyObservers();
         } catch (Exception e) {
             System.out.println("Error al registrar el proyecto: " + e.getMessage());
         }
@@ -74,4 +78,12 @@ public class ProjectService {
         proyecto.assignStudent(estudiante);
         System.out.println("Proyecto asignado a: " + estudiante.getName());
     }
+    
+    public static ProjectService getInstance(IProjectRepositoryPlugin repositorio) {
+        if (instance == null) {
+            instance = new ProjectService(repositorio);
+        }
+        return instance;
+    }
+
 }

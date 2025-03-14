@@ -87,11 +87,12 @@ public class Main {
         // Crear instancia del servicio de proyecto local
         System.out.println("Forma local con ProjectsRepositoryArrayPlugin");
         ProjectService projectServiceLocal = new ProjectService(repoLocal);
-       
-        // Crear usuarios
-        User empresa = new User("TechCorp", "contacto@techcorp.com", "EMPRESA");
-        User estudiante = new User("Juan Pérez", "juan@example.com", "ESTUDIANTE");
 
+        // Crear usuarios
+        //User empresa = new User("TechCorp", "contacto@techcorp.com", "EMPRESA");
+        //User estudiante = new User("Juan Pérez", "juan@example.com", "ESTUDIANTE");
+        User empresa = User.registerUser("TechCorp", "contacto@techcorp.com", "EMPRESA");
+        User estudiante = User.registerUser("Juan Pérez", "juan@example.com", "ESTUDIANTE");
         // Registrar un nuevo proyecto
         projectServiceLocal.registerProject("Sistema de Inventarios", "Desarrollar un sistema de gestión de inventarios.", empresa);
 
@@ -113,13 +114,11 @@ public class Main {
         }
 
         // ---------------------------------------------------
-        
         // ------------- plugin -----------------------
-         
-          // Crear instancia del servicio de proyecto plugin
-          System.out.println(" Forma plugin con  Plugin_ArrayList");
+        // Crear instancia del servicio de proyecto plugin
+        System.out.println(" Forma plugin con  Plugin_ArrayList");
         ProjectService projectServicePlugin = new ProjectService(repoPlugin);
-       
+
         // Crear usuarios
         User empresa1 = new User("TechCorp plugin", "contacto@techcorp.com", "EMPRESA");
         User estudiante1 = new User("Juan Pérez plugin", "juan@example.com", "ESTUDIANTE");
@@ -143,9 +142,8 @@ public class Main {
         for (User user : User.getUser()) {
             System.out.println("Nombre: " + user.getName() + ", Email: " + user.getEmail() + ", Rol: " + user.getRole());
         }
-        
+
         //-----------------------------------------------------
-        
         Home home = new Home(listaPlugins);
         home.setVisible(true);
     }

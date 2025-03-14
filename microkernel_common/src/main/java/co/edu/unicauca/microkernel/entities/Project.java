@@ -8,7 +8,7 @@ package co.edu.unicauca.microkernel.entities;
  *
  * @author lopez
  */
-public class Project {
+public class Project{
     private String title;
     private String description;
     private User company;
