@@ -108,6 +108,11 @@ public class newProject extends javax.swing.JFrame{
         jCBCompany.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jCBCompany.setForeground(new java.awt.Color(0, 0, 0));
         jCBCompany.setMaximumSize(new java.awt.Dimension(300, 100));
+        jCBCompany.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBCompanyActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -170,7 +175,7 @@ public class newProject extends javax.swing.JFrame{
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPTittleNewUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPHead, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
+            .addComponent(jPHead, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
             .addComponent(jPButtom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -210,6 +215,10 @@ public class newProject extends javax.swing.JFrame{
         }
         
     }//GEN-LAST:event_jBtnSaveProjectActionPerformed
+
+    private void jCBCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCompanyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBCompanyActionPerformed
 
     public void fillCompanies() {
         jCBCompany.removeAllItems();

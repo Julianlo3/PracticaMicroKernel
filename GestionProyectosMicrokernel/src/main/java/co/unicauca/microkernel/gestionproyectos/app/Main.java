@@ -101,7 +101,7 @@ public class Main {
         projectServiceLocal.listProject();
 
         // Asignar un estudiante al proyecto
-        projectServiceLocal.assignProject("Sistema de Inventarios", estudiante);
+        //projectServiceLocal.assignProject("Sistema de Inventarios", estudiante);
 
         // Listar proyectos nuevamente para reflejar los cambios
         System.out.println("\nProyectos después de la asignación:");
@@ -131,7 +131,7 @@ public class Main {
         projectServicePlugin.listProject();
 
         // Asignar un estudiante al proyecto
-        projectServicePlugin.assignProject("Sistema de Inventarios", estudiante1);
+        //projectServicePlugin.assignProject("Sistema de Inventarios", estudiante1);
 
         // Listar proyectos nuevamente para reflejar los cambios
         System.out.println("\nProyectos después de la asignación:");

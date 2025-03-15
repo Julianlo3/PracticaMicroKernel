@@ -54,7 +54,8 @@ public class HomeProject extends javax.swing.JFrame implements observer {
         jLMenu = new javax.swing.JLabel();
         jBtnRegisterProject = new javax.swing.JButton();
         jBtnBack = new javax.swing.JButton();
-        jBtnRegistrarUsuario = new javax.swing.JButton();
+        jBtnAsignarEstudiante = new javax.swing.JButton();
+        jBtnRegistrarUsuario1 = new javax.swing.JButton();
         jPContent = new javax.swing.JPanel();
         jPCompany = new javax.swing.JPanel();
         jLProject = new javax.swing.JLabel();
@@ -100,16 +101,27 @@ public class HomeProject extends javax.swing.JFrame implements observer {
         });
         jPLateralMenu.add(jBtnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, -1, -1));
 
-        jBtnRegistrarUsuario.setBackground(new java.awt.Color(0, 0, 0));
-        jBtnRegistrarUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jBtnRegistrarUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        jBtnRegistrarUsuario.setText("Registrar Usuario");
-        jBtnRegistrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+        jBtnAsignarEstudiante.setBackground(new java.awt.Color(0, 0, 0));
+        jBtnAsignarEstudiante.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jBtnAsignarEstudiante.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnAsignarEstudiante.setText("Asignar Estudiante");
+        jBtnAsignarEstudiante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnRegistrarUsuarioActionPerformed(evt);
+                jBtnAsignarEstudianteActionPerformed(evt);
             }
         });
-        jPLateralMenu.add(jBtnRegistrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 180, 50));
+        jPLateralMenu.add(jBtnAsignarEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 180, 50));
+
+        jBtnRegistrarUsuario1.setBackground(new java.awt.Color(0, 0, 0));
+        jBtnRegistrarUsuario1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jBtnRegistrarUsuario1.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnRegistrarUsuario1.setText("Registrar Usuario");
+        jBtnRegistrarUsuario1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRegistrarUsuario1ActionPerformed(evt);
+            }
+        });
+        jPLateralMenu.add(jBtnRegistrarUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 180, 50));
 
         jPContent.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -277,13 +289,30 @@ public class HomeProject extends javax.swing.JFrame implements observer {
         project.setVisible(true);
     }//GEN-LAST:event_jBtnRegisterProjectActionPerformed
 
-    private void jBtnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRegistrarUsuarioActionPerformed
+    private void jBtnAsignarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAsignarEstudianteActionPerformed
+       List<User> estudiantes = new ArrayList<>();
+       List<Project> proyectos = new ArrayList<>();
+       
+        for (User user : Users) {
+            if (user.getRole() == "ESTUDIANTE") {
+                estudiantes.add(user);
+            }
+        }
+        for (Project project : repositorio.getProjects()){
+            proyectos.add(project);
+        }
+        newAssignment assignment = new newAssignment(estudiantes, proyectos, repositorio);
+        assignment.setVisible(true);
+    }//GEN-LAST:event_jBtnAsignarEstudianteActionPerformed
+
+    private void jBtnRegistrarUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRegistrarUsuario1ActionPerformed
+        // TODO add your handling code here:
         newUser user = new newUser(Users);
         user.setVisible(true);
-    }//GEN-LAST:event_jBtnRegistrarUsuarioActionPerformed
+    }//GEN-LAST:event_jBtnRegistrarUsuario1ActionPerformed
 
     public void fillTableProject() {
-        DefaultTableModel modeloProyectos = new DefaultTableModel(new String[]{"Titulo", "descripcion", "Comapañia", "Estudiante encargado"}, 0);
+        DefaultTableModel modeloProyectos = new DefaultTableModel(new String[]{"Titulo", "Descripcion", "Comapañia", "Estudiante encargado"}, 0);
         modeloProyectos.setRowCount(0);
 
         for (Project project : repositorio.getProjects()) {
@@ -309,9 +338,10 @@ public class HomeProject extends javax.swing.JFrame implements observer {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Usuarios;
+    private javax.swing.JButton jBtnAsignarEstudiante;
     private javax.swing.JButton jBtnBack;
     private javax.swing.JButton jBtnRegisterProject;
-    private javax.swing.JButton jBtnRegistrarUsuario;
+    private javax.swing.JButton jBtnRegistrarUsuario1;
     private javax.swing.JLabel jLMenu;
     private javax.swing.JLabel jLProject;
     private javax.swing.JLabel jLTitulo;

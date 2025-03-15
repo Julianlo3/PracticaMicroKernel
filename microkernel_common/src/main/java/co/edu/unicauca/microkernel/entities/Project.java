@@ -108,4 +108,6 @@ public class Project{
                 + " | Empresa: " + company.getName()
                 + (student != null ? " | Estudiante: " + student.getName() : "");
     }
+    
+    
 }
