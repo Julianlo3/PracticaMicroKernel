@@ -8,7 +8,7 @@ package co.edu.unicauca.microkernel.entities;
  *
  * @author lopez
  */
-public class Project{
+public class Project extends Subject{
     private String title;
     private String description;
     private User company;
@@ -83,9 +83,11 @@ public class Project{
     public void assignStudent(User estudiante) {
         if (!"ESTUDIANTE".equals(estudiante.getRole())) {
             throw new IllegalArgumentException("Solo un estudiante puede ser asignado.");
+            
         }
         this.student = estudiante;
         this.state = "ASIGNADO";
+        notifyObservers(); 
     }
 
     /**
@@ -108,6 +110,6 @@ public class Project{
                 + " | Empresa: " + company.getName()
                 + (student != null ? " | Estudiante: " + student.getName() : "");
     }
-    
+
     
 }

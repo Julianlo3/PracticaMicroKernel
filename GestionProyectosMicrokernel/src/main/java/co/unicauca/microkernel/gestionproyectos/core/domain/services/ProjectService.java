@@ -77,6 +77,8 @@ public class ProjectService extends Subject{
         }
         proyecto.assignStudent(estudiante);
         System.out.println("Proyecto asignado a: " + estudiante.getName());
+        notifyObservers();
+        
     }
     
     public static ProjectService getInstance(IProjectRepositoryPlugin repositorio) {
